@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-// import { BsFillInfoSquareFill } from "react-icons/bs";
+import { AiFillDelete, AiOutlineBug } from "react-icons/ai";
+import { BsFillStopwatchFill } from "react-icons/bs";
+import { PiInfoFill } from "react-icons/pi";
+import { RiBookmarkFill } from "react-icons/ri";
 import "./styles.css";
 export default function TaskTodo() {
   const [taskInput, setTaskInput] = useState("");
@@ -155,39 +158,40 @@ export default function TaskTodo() {
                       className="delete-button"
                       onClick={() => handleDelete(ele.id)}
                     >
-                      D
+                      <AiFillDelete />
                     </button>
                   </td>
 
                   <td className="tasks">{ele.task} </td>
                   <td>
-                    {" "}
-                    <button className={ele.status}>{ele.status}</button>{" "}
+                    <button className={ele.status}>{ele.status}</button>
                   </td>
                   <td className="actions">
-                    <button
-                      className="pendingbtn"
-                      onClick={() => updateStatus(ele.id, "Pending")}
-                    >
-                      P
-                    </button>
                     <button
                       className="newbtn"
                       onClick={() => updateStatus(ele.id, "New")}
                     >
-                      N
+                      <AiOutlineBug />
                     </button>
+
+                    <button
+                      className="pendingbtn"
+                      onClick={() => updateStatus(ele.id, "Pending")}
+                    >
+                      <BsFillStopwatchFill />
+                    </button>
+
                     <button
                       className="donebtn"
                       onClick={() => updateStatus(ele.id, "Done")}
                     >
-                      D
+                      <RiBookmarkFill />
                     </button>
                     <button
                       className="infobtn"
                       onClick={() => handleInfo(ele.id)}
                     >
-                      !
+                      <PiInfoFill />
                     </button>
                   </td>
                 </tr>
@@ -205,7 +209,9 @@ export default function TaskTodo() {
           <div className="task-info">
             <div className="task-detail">
               <span className="detail-label">Date:</span>
-              <span className="detail-value">{infodata.date}</span>
+              <span className="detail-value">
+                {infodata.date.substring(0, 10)}
+              </span>
             </div>
             <div className="task-detail">
               <span className="detail-label">ID:</span>
