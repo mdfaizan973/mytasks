@@ -4,6 +4,7 @@ import { AiFillDelete, AiOutlineBug } from "react-icons/ai";
 import { BsFillStopwatchFill } from "react-icons/bs";
 import { PiInfoFill } from "react-icons/pi";
 import { RiBookmarkFill } from "react-icons/ri";
+import { message, Spin } from "antd";
 import "./styles.css";
 export default function TaskTodo() {
   const [taskInput, setTaskInput] = useState("");
@@ -17,7 +18,7 @@ export default function TaskTodo() {
 
   const fetchData = () => {
     axios
-      .get("http://localhost:3000/alltasks")
+      .get("https://orgaincspro.onrender.com/upcomingroducts")
       .then((res) => {
         setData(res.data);
         setLoading(false);
@@ -39,11 +40,13 @@ export default function TaskTodo() {
       task: taskInput,
       status: newTaskStatus,
     };
+    console.log(newTask, 11);
     axios
-      .post(`http://localhost:3000/alltasks`, newTask)
+      .post(`https://orgaincspro.onrender.com/upcomingroducts`, newTask)
       .then((res) => {
         console.log("New task added:", res.data);
         fetchData();
+        message.success("New Task Added Successfully !");
         setTaskInput("");
       })
       .catch((err) => {
@@ -53,7 +56,9 @@ export default function TaskTodo() {
 
   const updateStatus = (taskId, newStatus) => {
     axios
-      .patch(`http://localhost:3000/alltasks/${taskId}`, { status: newStatus })
+      .patch(`https://orgaincspro.onrender.com/upcomingroducts/${taskId}`, {
+        status: newStatus,
+      })
       .then((res) => {
         console.log(res);
         const updatedData = data.map((task) => {
@@ -62,6 +67,8 @@ export default function TaskTodo() {
           }
           return task;
         });
+        message.success(`Task Status Updated To ${newStatus}!`);
+
         setData(updatedData);
       })
       .catch((err) => {
@@ -72,11 +79,12 @@ export default function TaskTodo() {
   // info
   const handleInfo = (id) => {
     axios
-      .get(`http://localhost:3000/alltasks/${id}`)
+      .get(`https://orgaincspro.onrender.com/upcomingroducts/${id}`)
       .then((res) => {
         console.log(res.data);
         setInfoData(res.data);
         setIsOpen(true);
+        message.info(`Task ${id} Information!`);
       })
       .catch((err) => {
         console.log(err);
@@ -87,11 +95,12 @@ export default function TaskTodo() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3000/alltasks/${id}`)
+      .delete(`https://orgaincspro.onrender.com/upcomingroducts/${id}`)
       .then((res) => {
         console.log(res.data);
         const deletedData = data.filter((ele) => ele.id !== id);
         setData(deletedData);
+        message.error(`Task Removed - ${id}!`);
       })
       .catch((err) => {
         console.error(err);
@@ -148,7 +157,9 @@ export default function TaskTodo() {
       <div className="main_container">
         <table>
           {loading ? (
-            <div>Loading...</div>
+            <div style={{ padding: "10px", textAlign: "center" }}>
+              <Spin size="large" />
+            </div>
           ) : (
             <tbody>
               {filterData().map((ele) => (
