@@ -28,7 +28,7 @@ export default function TaskTodo() {
         setLoading(false);
       });
   };
-
+// ----
   const addTodo = () => {
     if (!taskInput.trim()) {
       alert("Please enter a task before adding!");
