@@ -28,7 +28,7 @@ export default function TaskTodo() {
         setLoading(false);
       });
   };
-// ----
+  // ----
   const addTodo = () => {
     if (!taskInput.trim()) {
       alert("Please enter a task before adding!");
@@ -76,7 +76,7 @@ export default function TaskTodo() {
       });
   };
 
-  // info
+  // info---
   const handleInfo = (id) => {
     axios
       .get(`https://orgaincspro.onrender.com/upcomingroducts/${id}`)
