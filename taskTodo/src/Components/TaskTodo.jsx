@@ -76,7 +76,7 @@ export default function TaskTodo() {
       });
   };
 
-  // info---
+  // info-----
   const handleInfo = (id) => {
     axios
       .get(`https://orgaincspro.onrender.com/upcomingroducts/${id}`)
