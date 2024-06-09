@@ -110,7 +110,7 @@ export default function TaskTodo() {
   // filter
   const filterData = () => {
     if (filterValue === "") {
-      return data; // Return all data if filter value is empty
+      return data; // Return all data if filter value is empty--
     } else {
       return data.filter((task) => task.status === filterValue); // Filter data based on selected value
     }
